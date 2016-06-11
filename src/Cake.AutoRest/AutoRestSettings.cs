@@ -21,7 +21,7 @@ namespace Cake.AutoRest
             
         }
 
-        private FilePath InputFile { get; set; }
+        internal FilePath InputFile { get; set; }
 
         // private ICakeEnvironment Environment { get; set; }
 
@@ -44,14 +44,14 @@ namespace Cake.AutoRest
             {
                 if (GeneratorSettings == null)
                 {
-                    builder.AppendSwitch(ArgumentNames.Generator, Generator.ToString());
+                    builder.AppendSwitch(ArgumentNames.Generator, Generator.ToGeneratorName());
                 }
                 else
                 {
                     builder.AppendSwitch(ArgumentNames.Generator,
                         Generator == CodeGenerator.None
-                        ? GeneratorSettings.Generator.ToString()
-                        : Generator.ToString());
+                        ? GeneratorSettings.Generator.ToGeneratorName()
+                        : Generator.ToGeneratorName());
                     builder.Append(string.Join(" ",
                         GeneratorSettings.GetArguments()
                             .Select(
@@ -105,6 +105,14 @@ namespace Cake.AutoRest
             var v = string.Empty;
             if (values.Any()) v = string.Join(" ", values);
             builder.Append($"{ArgumentNames.Separator}{argName} {v}");
+        }
+
+        [DebuggerStepThrough]
+        internal static string ToGeneratorName(this CodeGenerator gen)
+        {
+            var s = gen.ToString();
+            if (s.StartsWith("Azure")) s = s.Replace("Azure", "Azure.");
+            return s;
         }
     }
 

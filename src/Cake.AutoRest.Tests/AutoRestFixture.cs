@@ -27,7 +27,7 @@ namespace Cake.AutoRest.Tests
 
         protected override void RunTool()
         {
-            var tool = new AutoRestRunner(FileSystem, Environment, ProcessRunner, Tools);
+            var tool = new AutoRestRunner(FileSystem, Environment, ProcessRunner, Tools, new FakeLog());
             ActionSettings?.Invoke(Settings);
             var directoryPath = tool.Generate(InputFile, Settings);
         }

@@ -14,7 +14,7 @@ namespace Cake.AutoRest
         public static AutoRestRunner AutoRest(this ICakeContext ctx)
         {
             if (ctx == null) throw new ArgumentNullException(nameof(ctx));
-            return new AutoRestRunner(ctx.FileSystem, ctx.Environment, ctx.ProcessRunner, ctx.Tools);
+            return new AutoRestRunner(ctx.FileSystem, ctx.Environment, ctx.ProcessRunner, ctx.Tools, ctx.Log);
         }
     }
 }

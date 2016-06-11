@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cake.AutoRest", "Cake.AutoRest\Cake.AutoRest.csproj", "{1ED16D25-BC52-4D38-8DB2-A2305CDD6FF1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cake.AutoRest.Tests", "..\Cake.AutoRest.Tests\Cake.AutoRest.Tests.csproj", "{96E1217C-8BA5-497E-996A-0193CBD2067D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cake.AutoRest.Tests", "Cake.AutoRest.Tests\Cake.AutoRest.Tests.csproj", "{96E1217C-8BA5-497E-996A-0193CBD2067D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

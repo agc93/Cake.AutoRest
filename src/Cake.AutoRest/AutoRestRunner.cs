@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Cake.Core;
+using Cake.Core.Diagnostics;
 using Cake.Core.IO;
 using Cake.Core.Tooling;
 
@@ -11,11 +12,14 @@ namespace Cake.AutoRest
 {
     public class AutoRestRunner : Cake.Core.Tooling.Tool<AutoRestSettings>
     {
-        public AutoRestRunner(IFileSystem fileSystem, ICakeEnvironment environment, IProcessRunner processRunner, IToolLocator tools) : base(fileSystem, environment, processRunner, tools)
+        public AutoRestRunner(IFileSystem fileSystem, ICakeEnvironment environment, IProcessRunner processRunner, IToolLocator tools, ICakeLog log) : base(fileSystem, environment, processRunner, tools)
         {
             Environment = environment;
+            Log = log;
 
         }
+
+        private ICakeLog Log { get; set; }
 
         private ICakeEnvironment Environment { get; set; }
 
@@ -36,7 +40,9 @@ namespace Cake.AutoRest
 
         public DirectoryPath Generate(FilePath inputFile, AutoRestSettings settings)
         {
+            settings.InputFile = settings.InputFile ?? inputFile;
             var args = GetToolArguments(settings);
+            Log.Verbose(args.Render());
             Run(settings, args);
             return settings.OutputDirectory ?? "./Generated";
         }

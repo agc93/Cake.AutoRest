@@ -146,12 +146,25 @@ namespace Cake.AutoRest.Tests
                 {
                     InternalConstructors = true,
                 };
-                s.Generator = CodeGenerator.AzureCSharp;
+                s.Generator = CodeGenerator.NodeJS;
             };
             var result = Fixture.Run();
             result.Args.Should()
-                .Contain("-CodeGenerator AzureCSharp", "explicit generators override settings-provided ones")
+                .Contain("-CodeGenerator NodeJS", "explicit generators override settings-provided ones")
                 .And.Contain("-InternalConstructors true", "settings still show up regardless");
+        }
+
+        [Fact]
+        public void ShouldHandleAzureGeneratorNames()
+        {
+            Fixture.ActionSettings = s =>
+            {
+                s.Generator = CodeGenerator.AzureCSharp;
+            };
+            var result = Fixture.Run();
+            result.Args
+                .Should()
+                .Contain("-CodeGenerator Azure.CSharp", "Azure-specific gens use a dot in the name");
         }
     }
 }
