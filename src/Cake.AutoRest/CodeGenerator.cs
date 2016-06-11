@@ -1,4 +1,5 @@
-﻿namespace Cake.AutoRest
+﻿#pragma warning disable 1591
+namespace Cake.AutoRest
 {
     public enum CodeGenerator
     {

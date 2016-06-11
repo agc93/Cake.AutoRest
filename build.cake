@@ -86,6 +86,7 @@ Task("Copy-Files")
 	CreateDirectory(artifacts + "build");
 	foreach (var project in projects) {
 		CreateDirectory(artifacts + "build/" + project.Name);
+        CopyFiles(GetFiles(project.Path.GetDirectory() + "/" + project.Name + ".xml"), artifacts + "build/" + project.Name);
 		var files = GetFiles(project.Path.GetDirectory() +"/bin/" +configuration +"/" +project.Name +".*");
 		CopyFiles(files, artifacts + "build/" + project.Name);
 	}

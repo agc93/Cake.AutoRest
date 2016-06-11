@@ -1,21 +1,29 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using Cake.Core;
 using Cake.Core.IO;
-using Cake.Core.IO.Arguments;
 using Cake.Core.Tooling;
 
 namespace Cake.AutoRest
 {
+    /// <summary>
+    /// Settings to control the AutoRest generation process
+    /// </summary>
     public class AutoRestSettings : ToolSettings
     {
+        /// <summary>
+        /// Create a new instances of the <see cref="AutoRestSettings"/> class.
+        /// </summary>
+        /// <param name="inputFile">File containing a compatible API specification</param>
         public AutoRestSettings(FilePath inputFile)
         {
             InputFile = inputFile;
         }
 
+        /// <summary>
+        /// Create a new instances of the <see cref="AutoRestSettings"/> class.
+        /// </summary>
         public AutoRestSettings()
         {
             
@@ -23,18 +31,50 @@ namespace Cake.AutoRest
 
         internal FilePath InputFile { get; set; }
 
-        // private ICakeEnvironment Environment { get; set; }
-
+        /// <summary>
+        /// Any generator-specific settings.
+        /// </summary>
+        /// <remarks>Currently only implemented by CSharpGeneratorSettings</remarks>
         public IGeneratorSettings GeneratorSettings { get; set; }
-        public string Namespace { internal get; set; }
+        /// <summary>
+        /// The namespace to use for generated code
+        /// </summary>
+        public string Namespace { internal get; set ; }
+        /// <summary>
+        /// The location for generated files. If not specified, uses "Generated" as the default
+        /// </summary>
         public DirectoryPath OutputDirectory { internal get; set; }
+        /// <summary>
+        /// The code generator (see <see cref="CodeGenerator"/>) language. If not specified, defaults to CSharp.
+        /// </summary>
         public CodeGenerator Generator { internal get; set; }
+        /// <summary>
+        /// The Modeler to use on the input. If not specified, defaults to Swagger.
+        /// </summary>
         public string Modeler { internal get; set; }
+        /// <summary>
+        /// Name to use for the generated client type. By default, uses the value of the 'Title' field from the Swagger input. 
+        /// </summary>
         public string ClientName { internal get; set; }
+        /// <summary>
+        /// The maximum number of properties in the request body. If the number of properties in the request body is less than or equal to this value, these properties will be represented as method arguments
+        /// </summary>
         public int? PayloadFlattenThreshold { internal get; set; }
+        /// <summary>
+        /// Text to include as a header comment in generated files. Use NONE to suppress the default header. 
+        /// </summary>
         public string HeaderComment { internal get; set; }
+        /// <summary>
+        /// If true, the generated client includes a ServiceClientCredentials property and constructor parameter. Authentication behaviors are implemented by extending the ServiceClientCredentials type
+        /// </summary>
         public bool AddCredentials { internal get; set; }
+        /// <summary>
+        /// If set, will cause generated code to be output to a single file. Not supported by all code generators.
+        /// </summary>
         public string OutputFileName { internal get; set; }
+        /// <summary>
+        /// If set, will output verbose diagnostic messages.
+        /// </summary>
         public bool Verbose { internal get; set; }
 
         internal void Build(ProcessArgumentBuilder builder)
@@ -77,36 +117,18 @@ namespace Cake.AutoRest
 
     internal static class CoreExtensions
     {
-        
-        [DebuggerStepThrough]
-        internal static string Argument(this string s)
-        {
-            return $"{ArgumentNames.Separator}{s}";
-        }
-
         [DebuggerStepThrough]
         internal static bool IsNotEmpty(this string arg)
         {
             return !string.IsNullOrWhiteSpace(arg);
         }
 
-        [DebuggerStepThrough]
-        [Obsolete("Just use built-ins you heathen")]
-        internal static void AppendArg(this ProcessArgumentBuilder builder, string argName, params string[] values)
-        {
-            var v = string.Empty;
-            if (values.Any()) v = string.Join(" ", values);
-            builder.Append($"{ArgumentNames.Separator}{argName} {v}");
-        }
-
-        [DebuggerStepThrough]
-        internal static void AppendArgQuoted(this ProcessArgumentBuilder builder, string argName, bool quoteValue, params string[] values)
-        {
-            var v = string.Empty;
-            if (values.Any()) v = string.Join(" ", values);
-            builder.Append($"{ArgumentNames.Separator}{argName} {v}");
-        }
-
+        /// <summary>
+        /// Wraps ToString() with additional special processing for Azure generators
+        /// </summary>
+        /// <param name="gen">The generator to get a name of</param>
+        /// <returns>CLI-friendly name of the generator</returns>
+        /// <remarks>This could probably be replaced by using the <see cref="System.ComponentModel.DescriptionAttribute"/> class</remarks>
         [DebuggerStepThrough]
         internal static string ToGeneratorName(this CodeGenerator gen)
         {
