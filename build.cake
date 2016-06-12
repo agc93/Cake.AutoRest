@@ -118,7 +118,7 @@ Task("NuGet")
         var nuspecFiles = GetFiles("./**/*.nuspec");
         NuGetPack(nuspecFiles, new NuGetPackSettings() {
 			Version = versionInfo.NuGetVersionV2,
-            ReleaseNotes = ParseAllReleaseNotes("./ReleaseNotes.md").FirstOrDefault(v => v.Version.ToString() == versionInfo.NuGetVersionV2).Notes.ToList(),
+            ReleaseNotes = ParseAllReleaseNotes("./ReleaseNotes.md").FirstOrDefault(v => v.Version.ToString() == versionInfo.MajorMinorPatch).Notes.ToList(),
             OutputDirectory = artifacts + "/package"
 			});
     });
