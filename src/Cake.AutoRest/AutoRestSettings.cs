@@ -8,8 +8,9 @@ using Cake.Core.Tooling;
 namespace Cake.AutoRest
 {
     /// <summary>
-    /// Settings to control the AutoRest generation process
+    /// Settings to control the AutoRest generation process.
     /// </summary>
+    /// <remarks>Supports either standard object syntax or a fluent interface using extension methods.</remarks>
     public class AutoRestSettings : ToolSettings
     {
         /// <summary>
@@ -41,36 +42,51 @@ namespace Cake.AutoRest
         /// </summary>
         public string Namespace { internal get; set ; }
         /// <summary>
-        /// The location for generated files. If not specified, uses "Generated" as the default
+        /// The location for generated files.
         /// </summary>
+        /// <value>
+        /// Directory path for generated code output. If not specified, uses "Generated" as the default
+        /// </value>
         public DirectoryPath OutputDirectory { internal get; set; }
         /// <summary>
-        /// The code generator (see <see cref="CodeGenerator"/>) language. If not specified, defaults to CSharp.
+        /// The code generator (see <see cref="CodeGenerator"/>) language.
         /// </summary>
+        /// <value>
+        /// If not specified, defaults to CSharp.
+        /// </value>
         public CodeGenerator Generator { internal get; set; }
         /// <summary>
-        /// The Modeler to use on the input. If not specified, defaults to Swagger.
+        /// The Modeler to use on the input.
         /// </summary>
+        /// <value>If not specified, defaults to Swagger.</value>
         public string Modeler { internal get; set; }
         /// <summary>
-        /// Name to use for the generated client type. By default, uses the value of the 'Title' field from the Swagger input. 
+        /// Name to use for the generated client type. 
         /// </summary>
+        /// <value>By default, uses the value of the 'Title' field from the Swagger input.</value>
         public string ClientName { internal get; set; }
         /// <summary>
-        /// The maximum number of properties in the request body. If the number of properties in the request body is less than or equal to this value, these properties will be represented as method arguments
+        /// The maximum number of properties in the request body to be represented as method arguments.
         /// </summary>
+        /// <value>
+        /// If the number of properties in the request body is less than or equal to this value, these properties will be represented as method arguments
+        /// </value>
         public int? PayloadFlattenThreshold { internal get; set; }
         /// <summary>
-        /// Text to include as a header comment in generated files. Use NONE to suppress the default header. 
+        /// Text to include as a header comment in generated files.
         /// </summary>
+        /// <value>Use NONE to suppress the default header.</value>
         public string HeaderComment { internal get; set; }
         /// <summary>
         /// If true, the generated client includes a ServiceClientCredentials property and constructor parameter. Authentication behaviors are implemented by extending the ServiceClientCredentials type
         /// </summary>
         public bool AddCredentials { internal get; set; }
         /// <summary>
-        /// If set, will cause generated code to be output to a single file. Not supported by all code generators.
+        /// If set, will cause generated code to be output to a single file.
         /// </summary>
+        /// <remarks>
+        /// Not supported by all code generators.
+        /// </remarks>
         public string OutputFileName { internal get; set; }
         /// <summary>
         /// If set, will output verbose diagnostic messages.
