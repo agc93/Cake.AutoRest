@@ -29,6 +29,14 @@ namespace Cake.AutoRest.Tests
         }
 
         [Fact]
+        public void ShouldSetGeneratorSettings()
+        {
+            Fixture.Settings.WithGenerator(CodeGenerator.AzureCSharp,
+                new CSharpGeneratorSettings() {InternalConstructors = true});
+            Fixture.Settings.GeneratorSettings.ShouldBeOfType<CSharpGeneratorSettings>();
+        }
+
+        [Fact]
         public void ShouldSetModeler()
         {
             Fixture.Settings.WithModeler("swagger");

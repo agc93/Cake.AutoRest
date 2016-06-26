@@ -1,5 +1,7 @@
 #tool "GitVersion.CommandLine"
 #tool "xunit.runner.console"
+#addin "Cake.DocFx"
+#tool "docfx.msbuild"
 
 ///////////////////////////////////////////////////////////////////////////////
 // ARGUMENTS
@@ -79,8 +81,14 @@ Task("Build")
 			.SetConfiguration(configuration));
 });
 
+Task("Generate-Docs").Does(() => {
+	DocFx("./docfx/docfx.json");
+	Zip("./docfx/_site/", artifacts + "/docfx.zip");
+});
+
 Task("Copy-Files")
 	.IsDependentOn("Build")
+	.IsDependentOn("Generate-Docs")
 	.Does(() =>
 {
 	CreateDirectory(artifacts + "build");
@@ -116,9 +124,10 @@ Task("NuGet")
 		CreateDirectory(artifacts + "package/");
         Information("Building NuGet package");
         var nuspecFiles = GetFiles("./**/*.nuspec");
+		var versionNotes = ParseAllReleaseNotes("./ReleaseNotes.md").FirstOrDefault(v => v.Version.ToString() == versionInfo.MajorMinorPatch);
         NuGetPack(nuspecFiles, new NuGetPackSettings() {
 			Version = versionInfo.NuGetVersionV2,
-            ReleaseNotes = ParseAllReleaseNotes("./ReleaseNotes.md").FirstOrDefault(v => v.Version.ToString() == versionInfo.MajorMinorPatch).Notes.ToList(),
+            ReleaseNotes = versionNotes != null ? versionNotes.Notes.ToList() : new List<string>(),
             OutputDirectory = artifacts + "/package"
 			});
     });
