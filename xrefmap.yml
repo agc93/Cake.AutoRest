@@ -1,0 +1,279 @@
+sorted: true
+references:
+- uid: Cake.AutoRest
+  name: Cake.AutoRest
+  href: api/Cake.AutoRest.html#Cake_AutoRest
+  commentId: N:Cake.AutoRest
+  fullName: Cake.AutoRest
+- uid: Cake.AutoRest.AutoRestAliases
+  name: AutoRestAliases
+  href: api/Cake.AutoRest.AutoRestAliases.html#Cake_AutoRest_AutoRestAliases
+  commentId: T:Cake.AutoRest.AutoRestAliases
+  fullName: Cake.AutoRest.AutoRestAliases
+- uid: Cake.AutoRest.AutoRestAliases.AutoRest(Cake.Core.ICakeContext)
+  name: AutoRest(ICakeContext)
+  href: api/Cake.AutoRest.AutoRestAliases.html#Cake_AutoRest_AutoRestAliases_AutoRest_Cake_Core_ICakeContext_
+  commentId: M:Cake.AutoRest.AutoRestAliases.AutoRest(Cake.Core.ICakeContext)
+  fullName: Cake.AutoRest.AutoRestAliases.AutoRest(Cake.Core.ICakeContext)
+- uid: Cake.AutoRest.AutoRestRunner
+  name: AutoRestRunner
+  href: api/Cake.AutoRest.AutoRestRunner.html#Cake_AutoRest_AutoRestRunner
+  commentId: T:Cake.AutoRest.AutoRestRunner
+  fullName: Cake.AutoRest.AutoRestRunner
+- uid: Cake.AutoRest.AutoRestRunner.#ctor(Cake.Core.IO.IFileSystem,Cake.Core.ICakeEnvironment,Cake.Core.IO.IProcessRunner,Cake.Core.Tooling.IToolLocator,Cake.Core.Diagnostics.ICakeLog)
+  name: AutoRestRunner(IFileSystem, ICakeEnvironment, IProcessRunner, IToolLocator, ICakeLog)
+  href: api/Cake.AutoRest.AutoRestRunner.html#Cake_AutoRest_AutoRestRunner__ctor_Cake_Core_IO_IFileSystem_Cake_Core_ICakeEnvironment_Cake_Core_IO_IProcessRunner_Cake_Core_Tooling_IToolLocator_Cake_Core_Diagnostics_ICakeLog_
+  commentId: M:Cake.AutoRest.AutoRestRunner.#ctor(Cake.Core.IO.IFileSystem,Cake.Core.ICakeEnvironment,Cake.Core.IO.IProcessRunner,Cake.Core.Tooling.IToolLocator,Cake.Core.Diagnostics.ICakeLog)
+  fullName: Cake.AutoRest.AutoRestRunner.AutoRestRunner(Cake.Core.IO.IFileSystem, Cake.Core.ICakeEnvironment, Cake.Core.IO.IProcessRunner, Cake.Core.Tooling.IToolLocator, Cake.Core.Diagnostics.ICakeLog)
+- uid: Cake.AutoRest.AutoRestRunner.Generate(Cake.Core.IO.FilePath,Cake.AutoRest.AutoRestSettings)
+  name: Generate(FilePath, AutoRestSettings)
+  href: api/Cake.AutoRest.AutoRestRunner.html#Cake_AutoRest_AutoRestRunner_Generate_Cake_Core_IO_FilePath_Cake_AutoRest_AutoRestSettings_
+  commentId: M:Cake.AutoRest.AutoRestRunner.Generate(Cake.Core.IO.FilePath,Cake.AutoRest.AutoRestSettings)
+  fullName: Cake.AutoRest.AutoRestRunner.Generate(Cake.Core.IO.FilePath, Cake.AutoRest.AutoRestSettings)
+- uid: Cake.AutoRest.AutoRestRunner.Generate(Cake.Core.IO.FilePath,System.Action{Cake.AutoRest.AutoRestSettings})
+  name: Generate(FilePath, Action<AutoRestSettings>)
+  href: api/Cake.AutoRest.AutoRestRunner.html#Cake_AutoRest_AutoRestRunner_Generate_Cake_Core_IO_FilePath_System_Action_Cake_AutoRest_AutoRestSettings__
+  commentId: M:Cake.AutoRest.AutoRestRunner.Generate(Cake.Core.IO.FilePath,System.Action{Cake.AutoRest.AutoRestSettings})
+  name.vb: Generate(FilePath, Action(Of AutoRestSettings))
+  fullName: Cake.AutoRest.AutoRestRunner.Generate(Cake.Core.IO.FilePath, System.Action<Cake.AutoRest.AutoRestSettings>)
+  fullName.vb: Cake.AutoRest.AutoRestRunner.Generate(Cake.Core.IO.FilePath, System.Action(Of Cake.AutoRest.AutoRestSettings))
+- uid: Cake.AutoRest.AutoRestRunner.GetToolExecutableNames
+  name: GetToolExecutableNames()
+  href: api/Cake.AutoRest.AutoRestRunner.html#Cake_AutoRest_AutoRestRunner_GetToolExecutableNames
+  commentId: M:Cake.AutoRest.AutoRestRunner.GetToolExecutableNames
+  fullName: Cake.AutoRest.AutoRestRunner.GetToolExecutableNames()
+- uid: Cake.AutoRest.AutoRestRunner.GetToolName
+  name: GetToolName()
+  href: api/Cake.AutoRest.AutoRestRunner.html#Cake_AutoRest_AutoRestRunner_GetToolName
+  commentId: M:Cake.AutoRest.AutoRestRunner.GetToolName
+  fullName: Cake.AutoRest.AutoRestRunner.GetToolName()
+- uid: Cake.AutoRest.AutoRestSettings
+  name: AutoRestSettings
+  href: api/Cake.AutoRest.AutoRestSettings.html#Cake_AutoRest_AutoRestSettings
+  commentId: T:Cake.AutoRest.AutoRestSettings
+  fullName: Cake.AutoRest.AutoRestSettings
+- uid: Cake.AutoRest.AutoRestSettings.#ctor
+  name: AutoRestSettings()
+  href: api/Cake.AutoRest.AutoRestSettings.html#Cake_AutoRest_AutoRestSettings__ctor
+  commentId: M:Cake.AutoRest.AutoRestSettings.#ctor
+  fullName: Cake.AutoRest.AutoRestSettings.AutoRestSettings()
+- uid: Cake.AutoRest.AutoRestSettings.#ctor(Cake.Core.IO.FilePath)
+  name: AutoRestSettings(FilePath)
+  href: api/Cake.AutoRest.AutoRestSettings.html#Cake_AutoRest_AutoRestSettings__ctor_Cake_Core_IO_FilePath_
+  commentId: M:Cake.AutoRest.AutoRestSettings.#ctor(Cake.Core.IO.FilePath)
+  fullName: Cake.AutoRest.AutoRestSettings.AutoRestSettings(Cake.Core.IO.FilePath)
+- uid: Cake.AutoRest.AutoRestSettings.AddCredentials
+  name: AddCredentials
+  href: api/Cake.AutoRest.AutoRestSettings.html#Cake_AutoRest_AutoRestSettings_AddCredentials
+  commentId: P:Cake.AutoRest.AutoRestSettings.AddCredentials
+  fullName: Cake.AutoRest.AutoRestSettings.AddCredentials
+- uid: Cake.AutoRest.AutoRestSettings.ClientName
+  name: ClientName
+  href: api/Cake.AutoRest.AutoRestSettings.html#Cake_AutoRest_AutoRestSettings_ClientName
+  commentId: P:Cake.AutoRest.AutoRestSettings.ClientName
+  fullName: Cake.AutoRest.AutoRestSettings.ClientName
+- uid: Cake.AutoRest.AutoRestSettings.Generator
+  name: Generator
+  href: api/Cake.AutoRest.AutoRestSettings.html#Cake_AutoRest_AutoRestSettings_Generator
+  commentId: P:Cake.AutoRest.AutoRestSettings.Generator
+  fullName: Cake.AutoRest.AutoRestSettings.Generator
+- uid: Cake.AutoRest.AutoRestSettings.GeneratorSettings
+  name: GeneratorSettings
+  href: api/Cake.AutoRest.AutoRestSettings.html#Cake_AutoRest_AutoRestSettings_GeneratorSettings
+  commentId: P:Cake.AutoRest.AutoRestSettings.GeneratorSettings
+  fullName: Cake.AutoRest.AutoRestSettings.GeneratorSettings
+- uid: Cake.AutoRest.AutoRestSettings.HeaderComment
+  name: HeaderComment
+  href: api/Cake.AutoRest.AutoRestSettings.html#Cake_AutoRest_AutoRestSettings_HeaderComment
+  commentId: P:Cake.AutoRest.AutoRestSettings.HeaderComment
+  fullName: Cake.AutoRest.AutoRestSettings.HeaderComment
+- uid: Cake.AutoRest.AutoRestSettings.Modeler
+  name: Modeler
+  href: api/Cake.AutoRest.AutoRestSettings.html#Cake_AutoRest_AutoRestSettings_Modeler
+  commentId: P:Cake.AutoRest.AutoRestSettings.Modeler
+  fullName: Cake.AutoRest.AutoRestSettings.Modeler
+- uid: Cake.AutoRest.AutoRestSettings.Namespace
+  name: Namespace
+  href: api/Cake.AutoRest.AutoRestSettings.html#Cake_AutoRest_AutoRestSettings_Namespace
+  commentId: P:Cake.AutoRest.AutoRestSettings.Namespace
+  fullName: Cake.AutoRest.AutoRestSettings.Namespace
+- uid: Cake.AutoRest.AutoRestSettings.OutputDirectory
+  name: OutputDirectory
+  href: api/Cake.AutoRest.AutoRestSettings.html#Cake_AutoRest_AutoRestSettings_OutputDirectory
+  commentId: P:Cake.AutoRest.AutoRestSettings.OutputDirectory
+  fullName: Cake.AutoRest.AutoRestSettings.OutputDirectory
+- uid: Cake.AutoRest.AutoRestSettings.OutputFileName
+  name: OutputFileName
+  href: api/Cake.AutoRest.AutoRestSettings.html#Cake_AutoRest_AutoRestSettings_OutputFileName
+  commentId: P:Cake.AutoRest.AutoRestSettings.OutputFileName
+  fullName: Cake.AutoRest.AutoRestSettings.OutputFileName
+- uid: Cake.AutoRest.AutoRestSettings.PayloadFlattenThreshold
+  name: PayloadFlattenThreshold
+  href: api/Cake.AutoRest.AutoRestSettings.html#Cake_AutoRest_AutoRestSettings_PayloadFlattenThreshold
+  commentId: P:Cake.AutoRest.AutoRestSettings.PayloadFlattenThreshold
+  fullName: Cake.AutoRest.AutoRestSettings.PayloadFlattenThreshold
+- uid: Cake.AutoRest.AutoRestSettings.Verbose
+  name: Verbose
+  href: api/Cake.AutoRest.AutoRestSettings.html#Cake_AutoRest_AutoRestSettings_Verbose
+  commentId: P:Cake.AutoRest.AutoRestSettings.Verbose
+  fullName: Cake.AutoRest.AutoRestSettings.Verbose
+- uid: Cake.AutoRest.AutoRestSettingsExtensions
+  name: AutoRestSettingsExtensions
+  href: api/Cake.AutoRest.AutoRestSettingsExtensions.html#Cake_AutoRest_AutoRestSettingsExtensions
+  commentId: T:Cake.AutoRest.AutoRestSettingsExtensions
+  fullName: Cake.AutoRest.AutoRestSettingsExtensions
+- uid: Cake.AutoRest.AutoRestSettingsExtensions.AddCredentials(Cake.AutoRest.AutoRestSettings,System.Boolean)
+  name: AddCredentials(AutoRestSettings, Boolean)
+  href: api/Cake.AutoRest.AutoRestSettingsExtensions.html#Cake_AutoRest_AutoRestSettingsExtensions_AddCredentials_Cake_AutoRest_AutoRestSettings_System_Boolean_
+  commentId: M:Cake.AutoRest.AutoRestSettingsExtensions.AddCredentials(Cake.AutoRest.AutoRestSettings,System.Boolean)
+  fullName: Cake.AutoRest.AutoRestSettingsExtensions.AddCredentials(Cake.AutoRest.AutoRestSettings, System.Boolean)
+- uid: Cake.AutoRest.AutoRestSettingsExtensions.AddHeaderComment(Cake.AutoRest.AutoRestSettings,System.String)
+  name: AddHeaderComment(AutoRestSettings, String)
+  href: api/Cake.AutoRest.AutoRestSettingsExtensions.html#Cake_AutoRest_AutoRestSettingsExtensions_AddHeaderComment_Cake_AutoRest_AutoRestSettings_System_String_
+  commentId: M:Cake.AutoRest.AutoRestSettingsExtensions.AddHeaderComment(Cake.AutoRest.AutoRestSettings,System.String)
+  fullName: Cake.AutoRest.AutoRestSettingsExtensions.AddHeaderComment(Cake.AutoRest.AutoRestSettings, System.String)
+- uid: Cake.AutoRest.AutoRestSettingsExtensions.OutputToDirectory(Cake.AutoRest.AutoRestSettings,Cake.Core.IO.DirectoryPath)
+  name: OutputToDirectory(AutoRestSettings, DirectoryPath)
+  href: api/Cake.AutoRest.AutoRestSettingsExtensions.html#Cake_AutoRest_AutoRestSettingsExtensions_OutputToDirectory_Cake_AutoRest_AutoRestSettings_Cake_Core_IO_DirectoryPath_
+  commentId: M:Cake.AutoRest.AutoRestSettingsExtensions.OutputToDirectory(Cake.AutoRest.AutoRestSettings,Cake.Core.IO.DirectoryPath)
+  fullName: Cake.AutoRest.AutoRestSettingsExtensions.OutputToDirectory(Cake.AutoRest.AutoRestSettings, Cake.Core.IO.DirectoryPath)
+- uid: Cake.AutoRest.AutoRestSettingsExtensions.OutputToFile(Cake.AutoRest.AutoRestSettings,Cake.Core.IO.FilePath)
+  name: OutputToFile(AutoRestSettings, FilePath)
+  href: api/Cake.AutoRest.AutoRestSettingsExtensions.html#Cake_AutoRest_AutoRestSettingsExtensions_OutputToFile_Cake_AutoRest_AutoRestSettings_Cake_Core_IO_FilePath_
+  commentId: M:Cake.AutoRest.AutoRestSettingsExtensions.OutputToFile(Cake.AutoRest.AutoRestSettings,Cake.Core.IO.FilePath)
+  fullName: Cake.AutoRest.AutoRestSettingsExtensions.OutputToFile(Cake.AutoRest.AutoRestSettings, Cake.Core.IO.FilePath)
+- uid: Cake.AutoRest.AutoRestSettingsExtensions.UseClientName(Cake.AutoRest.AutoRestSettings,System.String)
+  name: UseClientName(AutoRestSettings, String)
+  href: api/Cake.AutoRest.AutoRestSettingsExtensions.html#Cake_AutoRest_AutoRestSettingsExtensions_UseClientName_Cake_AutoRest_AutoRestSettings_System_String_
+  commentId: M:Cake.AutoRest.AutoRestSettingsExtensions.UseClientName(Cake.AutoRest.AutoRestSettings,System.String)
+  fullName: Cake.AutoRest.AutoRestSettingsExtensions.UseClientName(Cake.AutoRest.AutoRestSettings, System.String)
+- uid: Cake.AutoRest.AutoRestSettingsExtensions.UseFlattenThreshold(Cake.AutoRest.AutoRestSettings,System.Int32)
+  name: UseFlattenThreshold(AutoRestSettings, Int32)
+  href: api/Cake.AutoRest.AutoRestSettingsExtensions.html#Cake_AutoRest_AutoRestSettingsExtensions_UseFlattenThreshold_Cake_AutoRest_AutoRestSettings_System_Int32_
+  commentId: M:Cake.AutoRest.AutoRestSettingsExtensions.UseFlattenThreshold(Cake.AutoRest.AutoRestSettings,System.Int32)
+  fullName: Cake.AutoRest.AutoRestSettingsExtensions.UseFlattenThreshold(Cake.AutoRest.AutoRestSettings, System.Int32)
+- uid: Cake.AutoRest.AutoRestSettingsExtensions.UseNamespace(Cake.AutoRest.AutoRestSettings,System.String)
+  name: UseNamespace(AutoRestSettings, String)
+  href: api/Cake.AutoRest.AutoRestSettingsExtensions.html#Cake_AutoRest_AutoRestSettingsExtensions_UseNamespace_Cake_AutoRest_AutoRestSettings_System_String_
+  commentId: M:Cake.AutoRest.AutoRestSettingsExtensions.UseNamespace(Cake.AutoRest.AutoRestSettings,System.String)
+  fullName: Cake.AutoRest.AutoRestSettingsExtensions.UseNamespace(Cake.AutoRest.AutoRestSettings, System.String)
+- uid: Cake.AutoRest.AutoRestSettingsExtensions.WithGenerator(Cake.AutoRest.AutoRestSettings,Cake.AutoRest.CodeGenerator,Cake.AutoRest.IGeneratorSettings)
+  name: WithGenerator(AutoRestSettings, CodeGenerator, IGeneratorSettings)
+  href: api/Cake.AutoRest.AutoRestSettingsExtensions.html#Cake_AutoRest_AutoRestSettingsExtensions_WithGenerator_Cake_AutoRest_AutoRestSettings_Cake_AutoRest_CodeGenerator_Cake_AutoRest_IGeneratorSettings_
+  commentId: M:Cake.AutoRest.AutoRestSettingsExtensions.WithGenerator(Cake.AutoRest.AutoRestSettings,Cake.AutoRest.CodeGenerator,Cake.AutoRest.IGeneratorSettings)
+  fullName: Cake.AutoRest.AutoRestSettingsExtensions.WithGenerator(Cake.AutoRest.AutoRestSettings, Cake.AutoRest.CodeGenerator, Cake.AutoRest.IGeneratorSettings)
+- uid: Cake.AutoRest.AutoRestSettingsExtensions.WithModeler(Cake.AutoRest.AutoRestSettings,System.String)
+  name: WithModeler(AutoRestSettings, String)
+  href: api/Cake.AutoRest.AutoRestSettingsExtensions.html#Cake_AutoRest_AutoRestSettingsExtensions_WithModeler_Cake_AutoRest_AutoRestSettings_System_String_
+  commentId: M:Cake.AutoRest.AutoRestSettingsExtensions.WithModeler(Cake.AutoRest.AutoRestSettings,System.String)
+  fullName: Cake.AutoRest.AutoRestSettingsExtensions.WithModeler(Cake.AutoRest.AutoRestSettings, System.String)
+- uid: Cake.AutoRest.AutoRestSettingsExtensions.WithVerboseOutput(Cake.AutoRest.AutoRestSettings)
+  name: WithVerboseOutput(AutoRestSettings)
+  href: api/Cake.AutoRest.AutoRestSettingsExtensions.html#Cake_AutoRest_AutoRestSettingsExtensions_WithVerboseOutput_Cake_AutoRest_AutoRestSettings_
+  commentId: M:Cake.AutoRest.AutoRestSettingsExtensions.WithVerboseOutput(Cake.AutoRest.AutoRestSettings)
+  fullName: Cake.AutoRest.AutoRestSettingsExtensions.WithVerboseOutput(Cake.AutoRest.AutoRestSettings)
+- uid: Cake.AutoRest.CodeGenerator
+  name: CodeGenerator
+  href: api/Cake.AutoRest.CodeGenerator.html#Cake_AutoRest_CodeGenerator
+  commentId: T:Cake.AutoRest.CodeGenerator
+  fullName: Cake.AutoRest.CodeGenerator
+- uid: Cake.AutoRest.CodeGenerator.AzureCSharp
+  name: AzureCSharp
+  href: api/Cake.AutoRest.CodeGenerator.html#Cake_AutoRest_CodeGenerator_AzureCSharp
+  commentId: F:Cake.AutoRest.CodeGenerator.AzureCSharp
+  fullName: Cake.AutoRest.CodeGenerator.AzureCSharp
+- uid: Cake.AutoRest.CodeGenerator.AzureJava
+  name: AzureJava
+  href: api/Cake.AutoRest.CodeGenerator.html#Cake_AutoRest_CodeGenerator_AzureJava
+  commentId: F:Cake.AutoRest.CodeGenerator.AzureJava
+  fullName: Cake.AutoRest.CodeGenerator.AzureJava
+- uid: Cake.AutoRest.CodeGenerator.AzureNodeJS
+  name: AzureNodeJS
+  href: api/Cake.AutoRest.CodeGenerator.html#Cake_AutoRest_CodeGenerator_AzureNodeJS
+  commentId: F:Cake.AutoRest.CodeGenerator.AzureNodeJS
+  fullName: Cake.AutoRest.CodeGenerator.AzureNodeJS
+- uid: Cake.AutoRest.CodeGenerator.AzurePython
+  name: AzurePython
+  href: api/Cake.AutoRest.CodeGenerator.html#Cake_AutoRest_CodeGenerator_AzurePython
+  commentId: F:Cake.AutoRest.CodeGenerator.AzurePython
+  fullName: Cake.AutoRest.CodeGenerator.AzurePython
+- uid: Cake.AutoRest.CodeGenerator.AzureRuby
+  name: AzureRuby
+  href: api/Cake.AutoRest.CodeGenerator.html#Cake_AutoRest_CodeGenerator_AzureRuby
+  commentId: F:Cake.AutoRest.CodeGenerator.AzureRuby
+  fullName: Cake.AutoRest.CodeGenerator.AzureRuby
+- uid: Cake.AutoRest.CodeGenerator.CSharp
+  name: CSharp
+  href: api/Cake.AutoRest.CodeGenerator.html#Cake_AutoRest_CodeGenerator_CSharp
+  commentId: F:Cake.AutoRest.CodeGenerator.CSharp
+  fullName: Cake.AutoRest.CodeGenerator.CSharp
+- uid: Cake.AutoRest.CodeGenerator.Java
+  name: Java
+  href: api/Cake.AutoRest.CodeGenerator.html#Cake_AutoRest_CodeGenerator_Java
+  commentId: F:Cake.AutoRest.CodeGenerator.Java
+  fullName: Cake.AutoRest.CodeGenerator.Java
+- uid: Cake.AutoRest.CodeGenerator.NodeJS
+  name: NodeJS
+  href: api/Cake.AutoRest.CodeGenerator.html#Cake_AutoRest_CodeGenerator_NodeJS
+  commentId: F:Cake.AutoRest.CodeGenerator.NodeJS
+  fullName: Cake.AutoRest.CodeGenerator.NodeJS
+- uid: Cake.AutoRest.CodeGenerator.None
+  name: None
+  href: api/Cake.AutoRest.CodeGenerator.html#Cake_AutoRest_CodeGenerator_None
+  commentId: F:Cake.AutoRest.CodeGenerator.None
+  fullName: Cake.AutoRest.CodeGenerator.None
+- uid: Cake.AutoRest.CodeGenerator.Python
+  name: Python
+  href: api/Cake.AutoRest.CodeGenerator.html#Cake_AutoRest_CodeGenerator_Python
+  commentId: F:Cake.AutoRest.CodeGenerator.Python
+  fullName: Cake.AutoRest.CodeGenerator.Python
+- uid: Cake.AutoRest.CodeGenerator.Ruby
+  name: Ruby
+  href: api/Cake.AutoRest.CodeGenerator.html#Cake_AutoRest_CodeGenerator_Ruby
+  commentId: F:Cake.AutoRest.CodeGenerator.Ruby
+  fullName: Cake.AutoRest.CodeGenerator.Ruby
+- uid: Cake.AutoRest.CSharpGeneratorSettings
+  name: CSharpGeneratorSettings
+  href: api/Cake.AutoRest.CSharpGeneratorSettings.html#Cake_AutoRest_CSharpGeneratorSettings
+  commentId: T:Cake.AutoRest.CSharpGeneratorSettings
+  fullName: Cake.AutoRest.CSharpGeneratorSettings
+- uid: Cake.AutoRest.CSharpGeneratorSettings.Generator
+  name: Generator
+  href: api/Cake.AutoRest.CSharpGeneratorSettings.html#Cake_AutoRest_CSharpGeneratorSettings_Generator
+  commentId: P:Cake.AutoRest.CSharpGeneratorSettings.Generator
+  fullName: Cake.AutoRest.CSharpGeneratorSettings.Generator
+- uid: Cake.AutoRest.CSharpGeneratorSettings.GetArguments
+  name: GetArguments()
+  href: api/Cake.AutoRest.CSharpGeneratorSettings.html#Cake_AutoRest_CSharpGeneratorSettings_GetArguments
+  commentId: M:Cake.AutoRest.CSharpGeneratorSettings.GetArguments
+  fullName: Cake.AutoRest.CSharpGeneratorSettings.GetArguments()
+- uid: Cake.AutoRest.CSharpGeneratorSettings.InternalConstructors
+  name: InternalConstructors
+  href: api/Cake.AutoRest.CSharpGeneratorSettings.html#Cake_AutoRest_CSharpGeneratorSettings_InternalConstructors
+  commentId: P:Cake.AutoRest.CSharpGeneratorSettings.InternalConstructors
+  fullName: Cake.AutoRest.CSharpGeneratorSettings.InternalConstructors
+- uid: Cake.AutoRest.CSharpGeneratorSettings.SyncMethodMode
+  name: SyncMethodMode
+  href: api/Cake.AutoRest.CSharpGeneratorSettings.html#Cake_AutoRest_CSharpGeneratorSettings_SyncMethodMode
+  commentId: P:Cake.AutoRest.CSharpGeneratorSettings.SyncMethodMode
+  fullName: Cake.AutoRest.CSharpGeneratorSettings.SyncMethodMode
+- uid: Cake.AutoRest.CSharpGeneratorSettings.UseDateTimeOffset
+  name: UseDateTimeOffset
+  href: api/Cake.AutoRest.CSharpGeneratorSettings.html#Cake_AutoRest_CSharpGeneratorSettings_UseDateTimeOffset
+  commentId: P:Cake.AutoRest.CSharpGeneratorSettings.UseDateTimeOffset
+  fullName: Cake.AutoRest.CSharpGeneratorSettings.UseDateTimeOffset
+- uid: Cake.AutoRest.IGeneratorSettings
+  name: IGeneratorSettings
+  href: api/Cake.AutoRest.IGeneratorSettings.html#Cake_AutoRest_IGeneratorSettings
+  commentId: T:Cake.AutoRest.IGeneratorSettings
+  fullName: Cake.AutoRest.IGeneratorSettings
+- uid: Cake.AutoRest.IGeneratorSettings.Generator
+  name: Generator
+  href: api/Cake.AutoRest.IGeneratorSettings.html#Cake_AutoRest_IGeneratorSettings_Generator
+  commentId: P:Cake.AutoRest.IGeneratorSettings.Generator
+  fullName: Cake.AutoRest.IGeneratorSettings.Generator
+- uid: Cake.AutoRest.IGeneratorSettings.GetArguments
+  name: GetArguments()
+  href: api/Cake.AutoRest.IGeneratorSettings.html#Cake_AutoRest_IGeneratorSettings_GetArguments
+  commentId: M:Cake.AutoRest.IGeneratorSettings.GetArguments
+  fullName: Cake.AutoRest.IGeneratorSettings.GetArguments()
