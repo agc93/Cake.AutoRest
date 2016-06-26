@@ -255,3 +255,4 @@ paket-files/
 ![Tt]ools/packages.config
 [Tt]ools/**/*
 dist/**
+src/**/*.xml
