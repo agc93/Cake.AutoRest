@@ -36,10 +36,12 @@ namespace Cake.AutoRest
         /// </summary>
         /// <param name="settings">Settings</param>
         /// <param name="gen">Desired code generator (any <see cref="CodeGenerator"/> member)</param>
+        /// <param name="genSettings">Optional generator-specific settings to use</param>
         /// <returns>The updated settings object</returns>
-        public static AutoRestSettings WithGenerator(this AutoRestSettings settings, CodeGenerator gen)
+        public static AutoRestSettings WithGenerator(this AutoRestSettings settings, CodeGenerator gen, IGeneratorSettings genSettings = null)
         {
             settings.Generator = gen;
+            if (genSettings != null) settings.GeneratorSettings = genSettings;
             return settings;
         }
 
