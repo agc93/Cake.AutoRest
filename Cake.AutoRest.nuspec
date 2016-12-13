@@ -12,8 +12,8 @@
 		<description>A Cake addin to generate client code from API definitions (including Swagger) using AutoRest</description>
 		<tags>cake build script swagger azure</tags>
 		<dependencies>
-	    	<dependency id="AutoRest" version="0.16.0" />
-	  </dependencies>
+			<dependency id="AutoRest" version="0.17.3" />
+		</dependencies>
 	</metadata>
 	<files>
 		<file src="dist\build\Cake.AutoRest\Cake.AutoRest.dll" target="lib\net45"/>
