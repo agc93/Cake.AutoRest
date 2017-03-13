@@ -257,12 +257,13 @@
             <param name="path">Directory to output generated code</param>
             <returns>The updated settings object</returns>
         </member>
-        <member name="M:Cake.AutoRest.AutoRestSettingsExtensions.WithGenerator(Cake.AutoRest.AutoRestSettings,Cake.AutoRest.CodeGenerator)">
+        <member name="M:Cake.AutoRest.AutoRestSettingsExtensions.WithGenerator(Cake.AutoRest.AutoRestSettings,Cake.AutoRest.CodeGenerator,Cake.AutoRest.IGeneratorSettings)">
             <summary>
             Sets the Generator used by AutoRest
             </summary>
             <param name="settings">Settings</param>
             <param name="gen">Desired code generator (any <see cref="T:Cake.AutoRest.CodeGenerator"/> member)</param>
+            <param name="genSettings">Optional generator-specific settings to use</param>
             <returns>The updated settings object</returns>
         </member>
         <member name="M:Cake.AutoRest.AutoRestSettingsExtensions.WithModeler(Cake.AutoRest.AutoRestSettings,System.String)">

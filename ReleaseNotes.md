@@ -7,3 +7,6 @@
 # 0.1.2
 * Updated with full docfx-powered documentation
 * Added missing parameter for generator settings
+
+# 0.2.0
+* Update to Cake 0.18.0
