@@ -1,27 +1,25 @@
-#tool "GitVersion.CommandLine"
-#tool "xunit.runner.console"
-#addin "Cake.DocFx"
-#tool "docfx.msbuild"
+#tool "nuget:?package=GitVersion.CommandLine"
+#load "helpers.cake"
+#tool nuget:?package=DocFx.Console
+#addin nuget:?package=Cake.DocFx
 
 ///////////////////////////////////////////////////////////////////////////////
 // ARGUMENTS
 ///////////////////////////////////////////////////////////////////////////////
 
-var target = Argument<string>("target", "Default");
-var configuration = Argument<string>("configuration", "Release");
+var target = Argument("target", "Default");
+var configuration = Argument("configuration", "Release");
 
 ///////////////////////////////////////////////////////////////////////////////
 // GLOBAL VARIABLES
 ///////////////////////////////////////////////////////////////////////////////
 
 var solutionPath = File("./src/Cake.AutoRest.sln");
-var solution = ParseSolution(solutionPath);
-var projects = solution.Projects;
-var projectPaths = projects.Select(p => p.Path.GetDirectory());
-var testAssemblies = projects.Where(p => p.Name.Contains(".Tests")).Select(p => p.Path.GetDirectory() + "/bin/" + configuration + "/" + p.Name + ".dll");
+var projects = GetProjects(solutionPath);
 var artifacts = "./dist/";
 var testResultsPath = MakeAbsolute(Directory(artifacts + "./test-results"));
 GitVersion versionInfo = null;
+var frameworks = new List<string> { "netstandard1.6", "net45" };
 
 ///////////////////////////////////////////////////////////////////////////////
 // SETUP / TEARDOWN
@@ -33,6 +31,7 @@ Setup(ctx =>
 	Information("Running tasks...");
 	versionInfo = GitVersion();
 	Information("Building for version {0}", versionInfo.FullSemVer);
+	Verbose("Building for " + string.Join(", ", frameworks));
 });
 
 Teardown(ctx =>
@@ -49,7 +48,7 @@ Task("Clean")
 	.Does(() =>
 {
 	// Clean solution directories.
-	foreach(var path in projectPaths)
+	foreach(var path in projects.AllProjectPaths)
 	{
 		Information("Cleaning {0}", path);
 		CleanDirectories(path + "/**/bin/" + configuration);
@@ -64,7 +63,10 @@ Task("Restore")
 {
 	// Restore all NuGet packages.
 	Information("Restoring solution...");
-	NuGetRestore(solutionPath);
+	//NuGetRestore(solutionPath);
+	foreach (var project in projects.AllProjectPaths) {
+		DotNetCoreRestore(project.FullPath);
+	}
 });
 
 Task("Build")
@@ -73,12 +75,35 @@ Task("Build")
 	.Does(() =>
 {
 	Information("Building solution...");
-	MSBuild(solutionPath, settings =>
-		settings.SetPlatformTarget(PlatformTarget.MSIL)
-			.WithProperty("TreatWarningsAsErrors","true")
-			.SetVerbosity(Verbosity.Quiet)
-			.WithTarget("Build")
-			.SetConfiguration(configuration));
+	foreach(var framework in frameworks) {
+		foreach (var project in projects.SourceProjectPaths) {
+			var settings = new DotNetCoreBuildSettings {
+				Framework = framework,
+				Configuration = configuration,
+				NoIncremental = true,
+			};
+			DotNetCoreBuild(project.FullPath, settings);
+		}
+	}
+	
+});
+
+Task("Run-Unit-Tests")
+	.IsDependentOn("Build")
+	.Does(() =>
+{
+	if (projects.TestProjects.Any()) {
+		CreateDirectory(testResultsPath);
+
+		var settings = new DotNetCoreTestSettings {
+			Configuration = configuration,
+			//ArgumentCustomization = args => args.AppendSwitchQuoted("--logger", "trx;LogFilePath=" + testResultsPath + "tests.trx")
+		};
+
+		foreach(var project in projects.TestProjects) {
+			DotNetCoreTest(project.Path.FullPath, settings);
+		}
+	}
 });
 
 Task("Generate-Docs").Does(() => {
@@ -86,61 +111,76 @@ Task("Generate-Docs").Does(() => {
 	Zip("./docfx/_site/", artifacts + "/docfx.zip");
 });
 
-Task("Copy-Files")
+Task("Post-Build")
 	.IsDependentOn("Build")
+	.IsDependentOn("Run-Unit-Tests")
 	.IsDependentOn("Generate-Docs")
 	.Does(() =>
 {
 	CreateDirectory(artifacts + "build");
-	foreach (var project in projects) {
+	CreateDirectory(artifacts + "modules");
+	foreach (var project in projects.SourceProjects) {
 		CreateDirectory(artifacts + "build/" + project.Name);
-        CopyFiles(GetFiles(project.Path.GetDirectory() + "/" + project.Name + ".xml"), artifacts + "build/" + project.Name);
-		var files = GetFiles(project.Path.GetDirectory() +"/bin/" +configuration +"/" +project.Name +".*");
-		CopyFiles(files, artifacts + "build/" + project.Name);
+		foreach (var framework in frameworks) {
+			var frameworkDir = artifacts + "build/" + project.Name + "/" + framework;
+			CreateDirectory(frameworkDir);
+			var files = GetFiles(project.Path.GetDirectory() + "/bin/" + configuration + "/" + framework + "/" + project.Name +".*");
+			CopyFiles(files, frameworkDir);
+		}
 	}
 });
 
-Task("Run-Unit-Tests")
-	.IsDependentOn("Build")
+Task("Pack")
+	.IsDependentOn("Post-Build")
 	.Does(() =>
 {
-	CreateDirectory(testResultsPath);
-
-	var settings = new XUnit2Settings {
-		NoAppDomain = true,
-		XmlReport = true,
-		HtmlReport = true,
-		OutputDirectory = testResultsPath,
-	};
-	settings.ExcludeTrait("Category", "Integration");
-
-	XUnit2(testAssemblies, settings);
+	CreateDirectory(artifacts + "/package");
+	foreach(var project in projects.SourceProjects)
+    {
+        Information("\nPacking {0}...", project.Name);
+        DotNetCorePack(project.Path.FullPath, new DotNetCorePackSettings 
+        {
+            Configuration = configuration,
+            OutputDirectory = artifacts + "/package/",
+            NoBuild = true,
+            Verbose = false,
+            ArgumentCustomization = args => args
+                .Append("--include-symbols --include-source")
+        });
+    }
 });
 
 Task("NuGet")
-    .IsDependentOn("Copy-Files")
-	.IsDependentOn("Run-Unit-Tests")
-    .Does(() => {
-		CreateDirectory(artifacts + "package/");
-        Information("Building NuGet package");
-        var nuspecFiles = GetFiles("./**/*.nuspec");
-		var versionNotes = ParseAllReleaseNotes("./ReleaseNotes.md").FirstOrDefault(v => v.Version.ToString() == versionInfo.MajorMinorPatch);
-        NuGetPack(nuspecFiles, new NuGetPackSettings() {
-			Version = versionInfo.NuGetVersionV2,
-            ReleaseNotes = versionNotes != null ? versionNotes.Notes.ToList() : new List<string>(),
-            OutputDirectory = artifacts + "/package"
-			});
-    });
+	.IsDependentOn("Post-Build")
+	.Does(() => 
+{
+	CreateDirectory(artifacts + "package");
+	Information("Building NuGet package");
+	var versionNotes = ParseAllReleaseNotes("./ReleaseNotes.md").FirstOrDefault(v => v.Version.ToString() == versionInfo.MajorMinorPatch);
+	var content = GetContent(frameworks, projects);
+	var settings = new NuGetPackSettings {
+		Id				= "Cake.AutoRest",
+		Version			= versionInfo.NuGetVersionV2,
+		Title			= "Cake.AutoRest",
+		Authors		 	= new[] { "Alistair Chapman" },
+		Owners			= new[] { "achapman", "cake-contrib" },
+		Description		= "A Cake addin to generate client code from API definitions (including Swagger) using AutoRest",
+		ReleaseNotes	= versionNotes != null ? versionNotes.Notes.ToList() : new List<string>(),
+		Summary			= "Adds DNF support to Cake builds.",
+		ProjectUrl		= new Uri("https://github.com/agc93/Cake.AutoRest/"),
+		IconUrl			= new Uri("https://cdn.rawgit.com/Azure/AutoRest/7c1576dfb56974176223545cfac5762d168ded5f/Documentation/images/autorest-small-flat.png"),
+		LicenseUrl		= new Uri("https://raw.githubusercontent.com/agc93/Cake.AutoRest/master/LICENSE"),
+		Copyright		= "Alistair Chapman 2017",
+		Tags			= new[] { "cake", "build", "script", "swagger", "api", "azure" },
+		OutputDirectory = artifacts + "/package",
+		Files			= content,
+		//KeepTemporaryNuSpecFile = true
+	};
 
-///////////////////////////////////////////////////////////////////////////////
-// TARGETS
-///////////////////////////////////////////////////////////////////////////////
+	NuGetPack(settings);
+});
 
 Task("Default")
 	.IsDependentOn("NuGet");
-
-///////////////////////////////////////////////////////////////////////////////
-// EXECUTION
-///////////////////////////////////////////////////////////////////////////////
 
 RunTarget(target);

@@ -9,4 +9,6 @@
 * Added missing parameter for generator settings
 
 # 0.2.0
-* Update to Cake 0.18.0
+* Update to Cake 0.19.5
+* Update to support .NET Core
+* Change to new `csproj` tooling

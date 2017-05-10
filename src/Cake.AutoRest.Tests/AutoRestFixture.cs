@@ -19,7 +19,7 @@ namespace Cake.AutoRest.Tests
 
         private void PrepareData()
         {
-            var json = Properties.Resources.PetStoreExampleJson;
+            var json = Properties.Resources.ResourceManager.GetString("PetStoreExampleJson");
             if (!FileSystem.Exist(InputFile)) FileSystem.CreateFile(InputFile);
             FileSystem.GetFile(InputFile).SetContent(json);
             Settings = new AutoRestSettings(InputFile);

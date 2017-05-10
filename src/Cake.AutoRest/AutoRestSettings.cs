@@ -144,7 +144,6 @@ namespace Cake.AutoRest
         /// </summary>
         /// <param name="gen">The generator to get a name of</param>
         /// <returns>CLI-friendly name of the generator</returns>
-        /// <remarks>This could probably be replaced by using the <see cref="System.ComponentModel.DescriptionAttribute"/> class</remarks>
         [DebuggerStepThrough]
         internal static string ToGeneratorName(this CodeGenerator gen)
         {

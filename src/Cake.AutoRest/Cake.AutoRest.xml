@@ -234,7 +234,6 @@
             </summary>
             <param name="gen">The generator to get a name of</param>
             <returns>CLI-friendly name of the generator</returns>
-            <remarks>This could probably be replaced by using the <see cref="T:System.ComponentModel.DescriptionAttribute"/> class</remarks>
         </member>
         <member name="T:Cake.AutoRest.AutoRestSettingsExtensions">
             <summary>
