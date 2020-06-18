@@ -1,10 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <DebugType>Embedded</DebugType>
-    <TargetFrameworks>netstandard1.6;net45</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <DocumentationFile>Cake.AutoRest.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Cake.Core" Version="0.19.5" />
+    <PackageReference Include="Cake.Core" Version="0.38.2" />
   </ItemGroup>
+  <PropertyGroup>
+    <IsPackable>true</IsPackable>
+    <PackageId>Cake.AutoRest</PackageId>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Copyright>Alistair Chapman 2020</Copyright>
+    <PackageDescription>A Cake addin to generate client code from API definitions (including Swagger) using AutoRest</PackageDescription>
+    <RepositoryUrl>https://github.com/agc93/Cake.AutoRest/</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageIconUrl>https://cdn.rawgit.com/Azure/AutoRest/7c1576dfb56974176223545cfac5762d168ded5f/Documentation/images/autorest-small-flat.png</PackageIconUrl>
+    <PackageTags>cake;build;script;swagger;api;azure</PackageTags>
+    <Authors>achapman</Authors>
+  </PropertyGroup>
 </Project>

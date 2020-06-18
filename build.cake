@@ -1,7 +1,7 @@
-#tool "nuget:?package=GitVersion.CommandLine"
-#load "helpers.cake"
-#tool nuget:?package=DocFx.Console
-#addin nuget:?package=Cake.DocFx
+#load "build/helpers.cake"
+#load "build/publish.cake"
+#tool nuget:?package=DocFx.Console&version=2.55.0
+#addin nuget:?package=Cake.DocFx&version=0.13.1
 
 ///////////////////////////////////////////////////////////////////////////////
 // ARGUMENTS
@@ -9,17 +9,23 @@
 
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
+var framework = Argument("framework", "netstandard2.0");
+
+///////////////////////////////////////////////////////////////////////////////
+// VERSIONING
+///////////////////////////////////////////////////////////////////////////////
+
+var packageVersion = string.Empty;
+#load "build/version.cake"
 
 ///////////////////////////////////////////////////////////////////////////////
 // GLOBAL VARIABLES
 ///////////////////////////////////////////////////////////////////////////////
 
 var solutionPath = File("./src/Cake.AutoRest.sln");
-var projects = GetProjects(solutionPath);
+var projects = GetProjects(solutionPath, configuration);
 var artifacts = "./dist/";
 var testResultsPath = MakeAbsolute(Directory(artifacts + "./test-results"));
-GitVersion versionInfo = null;
-var frameworks = new List<string> { "netstandard1.6", "net45" };
 
 ///////////////////////////////////////////////////////////////////////////////
 // SETUP / TEARDOWN
@@ -29,9 +35,12 @@ Setup(ctx =>
 {
 	// Executed BEFORE the first task.
 	Information("Running tasks...");
-	versionInfo = GitVersion();
-	Information("Building for version {0}", versionInfo.FullSemVer);
-	Verbose("Building for " + string.Join(", ", frameworks));
+	Information("Running tasks...");
+    packageVersion = BuildVersion(fallbackVersion);
+	if (FileExists("./build/.dotnet/dotnet.exe")) {
+		Information("Using local install of `dotnet` SDK!");
+		Context.Tools.RegisterFile("./build/.dotnet/dotnet.exe");
+	}
 });
 
 Teardown(ctx =>
@@ -75,17 +84,12 @@ Task("Build")
 	.Does(() =>
 {
 	Information("Building solution...");
-	foreach(var framework in frameworks) {
-		foreach (var project in projects.SourceProjectPaths) {
-			var settings = new DotNetCoreBuildSettings {
-				Framework = framework,
-				Configuration = configuration,
-				NoIncremental = true,
-			};
-			DotNetCoreBuild(project.FullPath, settings);
-		}
-	}
-	
+	var settings = new DotNetCoreBuildSettings {
+		Configuration = configuration,
+		NoIncremental = true,
+		ArgumentCustomization = args => args.Append($"/p:Version={packageVersion}")
+	};
+	DotNetCoreBuild(solutionPath, settings);
 });
 
 Task("Run-Unit-Tests")
@@ -118,15 +122,11 @@ Task("Post-Build")
 	.Does(() =>
 {
 	CreateDirectory(artifacts + "build");
-	CreateDirectory(artifacts + "modules");
 	foreach (var project in projects.SourceProjects) {
-		CreateDirectory(artifacts + "build/" + project.Name);
-		foreach (var framework in frameworks) {
-			var frameworkDir = artifacts + "build/" + project.Name + "/" + framework;
-			CreateDirectory(frameworkDir);
-			var files = GetFiles(project.Path.GetDirectory() + "/bin/" + configuration + "/" + framework + "/" + project.Name +".*");
-			CopyFiles(files, frameworkDir);
-		}
+		var buildDir = artifacts + "build/" + project.Name;
+		CreateDirectory(buildDir);
+		var files = GetFiles(project.Path.GetDirectory() + "/bin/" + configuration + "/**/" + project.Name +".*");
+		CopyFiles(files, buildDir);
 	}
 });
 
@@ -134,53 +134,23 @@ Task("Pack")
 	.IsDependentOn("Post-Build")
 	.Does(() =>
 {
-	CreateDirectory(artifacts + "/package");
-	foreach(var project in projects.SourceProjects)
-    {
-        Information("\nPacking {0}...", project.Name);
-        DotNetCorePack(project.Path.FullPath, new DotNetCorePackSettings 
-        {
-            Configuration = configuration,
-            OutputDirectory = artifacts + "/package/",
-            NoBuild = true,
-            Verbose = false,
-            ArgumentCustomization = args => args
-                .Append("--include-symbols --include-source")
-        });
-    }
-});
-
-Task("NuGet")
-	.IsDependentOn("Post-Build")
-	.Does(() => 
-{
-	CreateDirectory(artifacts + "package");
-	Information("Building NuGet package");
-	var versionNotes = ParseAllReleaseNotes("./ReleaseNotes.md").FirstOrDefault(v => v.Version.ToString() == versionInfo.MajorMinorPatch);
-	var content = GetContent(frameworks, projects);
-	var settings = new NuGetPackSettings {
-		Id				= "Cake.AutoRest",
-		Version			= versionInfo.NuGetVersionV2,
-		Title			= "Cake.AutoRest",
-		Authors		 	= new[] { "Alistair Chapman" },
-		Owners			= new[] { "achapman", "cake-contrib" },
-		Description		= "A Cake addin to generate client code from API definitions (including Swagger) using AutoRest",
-		ReleaseNotes	= versionNotes != null ? versionNotes.Notes.ToList() : new List<string>(),
-		Summary			= "Adds DNF support to Cake builds.",
-		ProjectUrl		= new Uri("https://github.com/agc93/Cake.AutoRest/"),
-		IconUrl			= new Uri("https://cdn.rawgit.com/Azure/AutoRest/7c1576dfb56974176223545cfac5762d168ded5f/Documentation/images/autorest-small-flat.png"),
-		LicenseUrl		= new Uri("https://raw.githubusercontent.com/agc93/Cake.AutoRest/master/LICENSE"),
-		Copyright		= "Alistair Chapman 2017",
-		Tags			= new[] { "cake", "build", "script", "swagger", "api", "azure" },
-		OutputDirectory = artifacts + "/package",
-		Files			= content,
-		//KeepTemporaryNuSpecFile = true
+	Information("Building NuGet packages");
+	var nupkgDir = $"{artifacts}/nuget/";
+	CreateDirectory(nupkgDir);
+	var versionNotes = ParseAllReleaseNotes("./ReleaseNotes.md").FirstOrDefault(v => v.Version.ToString() == packageVersion);
+	var releaseNotes = versionNotes != null ? string.Join(Environment.NewLine, versionNotes.Notes.ToList()) : "";
+	var packSettings = new DotNetCorePackSettings
+	{
+		Configuration = configuration,
+		OutputDirectory = nupkgDir,
+		IncludeSymbols = true,
+		NoBuild = true,
+		ArgumentCustomization = args => args.Append($"/p:PackageVersion={packageVersion}").Append($"/p:PackageReleaseNotes=\"{releaseNotes}\"")
 	};
-
-	NuGetPack(settings);
+	DotNetCorePack(solutionPath, packSettings);
 });
 
 Task("Default")
-	.IsDependentOn("NuGet");
+	.IsDependentOn("Pack");
 
 RunTarget(target);
