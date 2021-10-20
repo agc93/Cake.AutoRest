@@ -5,7 +5,7 @@
     <DocumentationFile>Cake.AutoRest.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Cake.Core" Version="0.38.2" />
+    <PackageReference Include="Cake.Core" Version="1.0.0" />
   </ItemGroup>
   <PropertyGroup>
     <IsPackable>true</IsPackable>
